@@ -337,10 +337,8 @@ def main():
         readme = f.read()
     scripts = ["scripts/xon.sh"]
     if sys.platform == "win32":
-        scripts.append("scripts/xonsh.bat")
         scripts.append("scripts/xonsh-cat.bat")
     else:
-        scripts.append("scripts/xonsh")
         scripts.append("scripts/xonsh-cat")
     skw = dict(
         name="xonsh",
@@ -405,6 +403,7 @@ def main():
                 "xonshcon = xonsh.pyghooks:XonshConsoleLexer",
             ],
             "pytest11": ["xonsh = xonsh.pytest_plugin"],
+            "console_scripts": ["xonsh = xonsh.main:main"],
         }
         skw["cmdclass"]["develop"] = xdevelop
         skw["extras_require"] = {

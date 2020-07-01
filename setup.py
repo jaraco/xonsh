@@ -336,10 +336,6 @@ def main():
     with open(os.path.join(os.path.dirname(__file__), "README.rst"), "r") as f:
         readme = f.read()
     scripts = ["scripts/xon.sh"]
-    if sys.platform == "win32":
-        scripts.append("scripts/xonsh-cat.bat")
-    else:
-        scripts.append("scripts/xonsh-cat")
     skw = dict(
         name="xonsh",
         description="Python-powered, cross-platform, Unix-gazing shell",
@@ -393,7 +389,10 @@ def main():
                 "xonshcon = xonsh.pyghooks:XonshConsoleLexer",
             ],
             "pytest11": ["xonsh = xonsh.pytest_plugin"],
-            "console_scripts": ["xonsh = xonsh.main:main"],
+            "console_scripts": [
+                "xonsh = xonsh.main:main",
+                "xonsh-cat = xonsh.xoreutils.cat:cat_main",
+            ],
         }
         skw["cmdclass"]["develop"] = xdevelop
         skw["extras_require"] = {
